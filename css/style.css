@@ -78,9 +78,9 @@ body {
   background-color: #2277AA;
   display: inline-block;
   width: 85px;
-  height: 2em;
-  line-height: 2em;
-  border-radius: 20px;
+  height: 3em;
+  line-height: 3em;
+  border-radius: 35px;
 }
 #showB1 {
   border-top-right-radius: 0px;
