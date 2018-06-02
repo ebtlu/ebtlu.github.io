@@ -4,6 +4,9 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+a {
+  text-decoration: none;
+}
 body {
   background-color: #F0F0F0;
 }
@@ -13,7 +16,7 @@ body {
   border-radius: 50%;
 }
 .clock {
-  border: 5px solid #FFF;
+  border: 5px solid #33AAFF;
   border-radius: 100%;
   display: block;
   height: 250px;
@@ -21,7 +24,7 @@ body {
   position: relative;
 }
 .clock .hour {
-  background: #fff;
+  background: #33AAFF;
   height: 0;
   left: 50%;
   position: absolute;
@@ -36,7 +39,7 @@ body {
   padding: 60px 2px 0;
 }
 .clock .minute {
-  background: #fff;
+  background: #33AAFF;
   height: 0;
   left: 50%;
   position: absolute;
@@ -52,8 +55,41 @@ body {
 }
 .intro {
   text-align: center;
-  color: green;
+  color: #555555;
+  margin-top: 10px;
 }
-.work {
-  font-size:2em;
+.name {
+  font-size:1.7em;
+}
+.jobshow {
+  text-align: center;
+  padding: 0px;
+  width: 270px;
+  height: 2em;
+  position: absolute;
+  left: 50%;
+  margin-left: -135px;
+  margin-top: 20px;
+}
+.showB {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  background-color: #2277AA;
+  display: inline-block;
+  width: 85px;
+  height: 2em;
+  line-height: 2em;
+  border-radius: 20px;
+}
+#showB1 {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+#showB2 {
+  border-radius: 0px;
+}
+#showB3 {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
