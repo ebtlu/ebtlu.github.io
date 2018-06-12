@@ -1,0 +1,36 @@
+body{
+  background:#57068c;
+  width:100%;
+  height:100%;
+}
+.canvas{
+  position:relative;
+  width:224px;
+  margin:20px auto;
+}
+svg {
+  position:absolute;
+  transform-origin:center;
+  transform:scale(0.5);
+  transition:.5s;
+}
+#ic-search {
+  opacity:.8;
+  transform:translate(4px,6px);
+  animation: searching 5s   cubic-bezier(0.42,-0.33, 0.44, 1.45) 0s infinite normal forwards running
+}
+
+@keyframes searching {
+  0% {
+    transform:translate(4px,6px);
+  }
+  33% {
+    transform:translate(94px,10px);
+  }
+  67% {
+    transform:translate(8px,138px);
+  }
+  100% {
+    transform:translate(152px,108px);
+  }
+}
