@@ -1,10 +1,9 @@
 // DOM stuff
-var container = document.getElementById("container"),
+let container = document.getElementById("container"),
     shapeName_dom = document.getElementById("shapeName"),
 
-
-// App stuff
-spheres = [],
+    // App stuff
+    spheres = [],
     colorSine = 0,
     planeWidth = 800,
     planeHeight = 800,
@@ -13,17 +12,15 @@ spheres = [],
     mouseYSpeed = 0,
     speed = 0.02,
 
-
-// Shape vars
-currentShape = void 0,
+    // Shape vars
+    currentShape,
     shapeIndex = 1,
     points = 200,
     frequency = 3,
     sine = 0,
 
-
-// THREE.JS
-renderer = new THREE.WebGLRenderer(),
+    // THREE.JS
+    renderer = new THREE.WebGLRenderer(),
     width = window.innerWidth,
     height = window.innerHeight,
     fov = 50,
@@ -39,8 +36,7 @@ renderer = new THREE.WebGLRenderer(),
 
 // Initialization
 window.onload = function () {
-  var x = void 0,
-      z = void 0,
+  let x, z,
       i = 0;
 
   // Setup renderer
@@ -54,20 +50,20 @@ window.onload = function () {
 
   // Add spheres
   while (i++ < points) {
-    var s = new THREE.Mesh(new THREE.SphereBufferGeometry(5, 6, 6), new THREE.MeshStandardMaterial());
+    let s = new THREE.Mesh(new THREE.SphereBufferGeometry(5, 6, 6), new THREE.MeshStandardMaterial());
     s.castShadow = true;
     spheres.push(s);
     scene.add(s);
   }
 
-  var texture = new THREE.TextureLoader().load('https://4.bp.blogspot.com/-1_GBGKs2MmY/Wblkc-stQQI/AAAAAAAADag/rZelZjZydtoMDhbUMSl_2bRdSJ5otigaACLcBGAs/s1600/stonern01.jpg');
+  const texture = new THREE.TextureLoader().load('https://4.bp.blogspot.com/-1_GBGKs2MmY/Wblkc-stQQI/AAAAAAAADag/rZelZjZydtoMDhbUMSl_2bRdSJ5otigaACLcBGAs/s1600/stonern01.jpg');
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
   texture.repeat.set(3, 3);
 
-  var planeGeometry = new THREE.PlaneBufferGeometry(planeWidth, planeHeight);
-  var planeMaterial = new THREE.MeshStandardMaterial({ roughness: 0.9, metalness: 1, map: texture });
-  var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  const planeGeometry = new THREE.PlaneBufferGeometry(planeWidth, planeHeight);
+  const planeMaterial = new THREE.MeshStandardMaterial({ roughness: 0.9, metalness: 1, map: texture });
+  const plane = new THREE.Mesh(planeGeometry, planeMaterial);
   plane.receiveShadow = true;
 
   plane.position.set(0, -160, 0);
@@ -75,18 +71,18 @@ window.onload = function () {
   scene.add(plane);
 
   // Point light
-  var pointLight = new THREE.PointLight(0xFFFFFF);
+  const pointLight = new THREE.PointLight(0xFFFFFF);
   scene.add(pointLight);
 
   // Directional light with shadow camera
-  var light = new THREE.DirectionalLight(0xdfebff, 1.75);
+  const light = new THREE.DirectionalLight(0xdfebff, 1.75);
   light.position.set(250, 400, 0);
   light.position.multiplyScalar(1.3);
   light.castShadow = true;
   //light.shadowCameraVisible = true;
   light.shadow.mapSize.width = 512;
   light.shadow.mapSize.height = 512;
-  var d = 300;
+  const d = 300;
   light.shadow.camera.left = -d;
   light.shadow.camera.right = d;
   light.shadow.camera.top = d;
@@ -99,7 +95,7 @@ window.onload = function () {
 
   // Start!
   loop();
-};
+}
 function loop() {
 
   sine += speed;
@@ -108,7 +104,11 @@ function loop() {
   document.body.style.cursor = mouseDown ? "move" : "default";
 
   // Update the camera position
-  camera.position.lerp(new THREE.Vector3(Math.cos(cameraRotationX) * cameraDistance, Math.cos(cameraRotationY) * cameraDistance, Math.sin(cameraRotationZ) * cameraDistance), .1);
+  camera.position.lerp(new THREE.Vector3(
+    Math.cos(cameraRotationX) * cameraDistance,
+    Math.cos(cameraRotationY) * cameraDistance,
+    Math.sin(cameraRotationZ) * cameraDistance), .1
+  );
   camera.lookAt(new THREE.Vector3(0, 0, 0));
 
   // Apply rotation to camera when mouse is pressed
@@ -119,10 +119,10 @@ function loop() {
   }
 
   // Iterate through spheres, get desired positions and "lerp" to them
-  spheres.forEach(function (sphere, i) {
+  spheres.forEach((sphere, i) => {
     sphere.position.lerp(currentShape(sphere, i, points), .04);
   });
-
+  
   // Cycle colors
   colorSine += speed;
 
@@ -131,15 +131,17 @@ function loop() {
   requestAnimationFrame(loop);
 }
 
-var shapes = {
-  ball: function ball(s, i, max) {
-    var x = void 0,
-        y = void 0,
-        z = void 0,
+const shapes = {
+  ball: function (s, i, max) {
+    let x, y, z,
         frac = i / max,
         scale = .9 + Math.sin(colorSine + frac * Math.PI * 3),
         amplitude = 20 + Math.sin(frac * Math.PI) * 90,
-        color = new THREE.Color(.3, 1 - Math.sin(colorSine + frac * 4 * Math.PI), 1.0);
+        color = new THREE.Color(
+          .3,
+          1 - Math.sin(colorSine + frac * 4 * Math.PI),
+          1.0
+        );
 
     s.scale.lerp(new THREE.Vector3(scale, scale, scale), 0.01);
     s.material.color.lerp(color, .03);
@@ -149,14 +151,16 @@ var shapes = {
     z = Math.sin(sine + frac * 2 * Math.PI * frequency) * amplitude;
     return new THREE.Vector3(x, y, z);
   },
-  loop: function loop(s, i, max) {
-    var x = void 0,
-        y = void 0,
-        z = void 0,
+  loop: function (s, i, max) {
+    let x, y, z,
         frac = i / max,
         amplitude = 40 + Math.sin(frac * Math.PI * 2) * 190,
         colorSpeed = colorSine * 6,
-        color = new THREE.Color(Math.sin(colorSpeed + frac * 20 * Math.PI), Math.sin(Math.PI / 2 + colorSpeed + frac * 20 * Math.PI), Math.sin(Math.PI + colorSpeed + frac * 20 * Math.PI));
+        color = new THREE.Color(
+          Math.sin(colorSpeed + frac * 20 * Math.PI),
+          Math.sin((Math.PI / 2) + colorSpeed + frac * 20 * Math.PI),
+          Math.sin(Math.PI + colorSpeed + frac * 20 * Math.PI)
+        );
 
     s.scale.lerp(new THREE.Vector3(1, 1, 1), 0.01);
     s.material.color.lerp(color, .1);
@@ -164,13 +168,11 @@ var shapes = {
     x = Math.cos(sine + frac * 2 * Math.PI * frequency) * amplitude;
     y = Math.sin(sine + frac * 2 * Math.PI) * 150;
     z = Math.sin(sine + frac * 2 * Math.PI * frequency) * amplitude;
-
+    
     return new THREE.Vector3(x, y, z);
   },
-  snake: function snake(s, i, max) {
-    var x = void 0,
-        y = void 0,
-        z = void 0,
+  snake: function (s, i, max) {
+    let x, y, z,
         frac = i / max,
         scale = .2 + frac * 2,
         amplitudeY = 25 - Math.sin(frac * 2 * Math.PI) * 20,
@@ -184,10 +186,8 @@ var shapes = {
     z = 250 - frac * 500;
     return new THREE.Vector3(x, y, z);
   },
-  sun: function sun(s, i, max) {
-    var x = void 0,
-        y = void 0,
-        z = void 0,
+  sun: function (s, i, max) {
+    let x, y, z,
         frac = i / max,
         d = frac * 150,
         rotation = sine / 5;
@@ -201,10 +201,8 @@ var shapes = {
 
     return new THREE.Vector3(x, y, z);
   },
-  clock: function clock(s, i, max) {
-    var x = void 0,
-        y = void 0,
-        z = void 0,
+  clock: function(s, i, max) {
+    let x, y, z, 
         scale = new THREE.Vector3(1, 1, 1),
         color = new THREE.Color(),
         twoPi = -2 * Math.PI,
@@ -217,65 +215,69 @@ var shapes = {
         minutesFrac = minutes / 60,
         hours = date.getHours() + minutesFrac,
         hoursFrac = hours % 12 / 12;
-
+    
     // Seconds
     if (i < 60) {
-      var shFrac = i / 60;
+      const shFrac = i / 60;
       y = Math.cos(shFrac * twoPi) * 140;
       z = Math.sin(shFrac * twoPi) * 140;
-      color = seconds === i ? new THREE.Color(1, 0, 0) : new THREE.Color(1, 1, 1);
-      scale = i % 15 === 0 || seconds === i ? new THREE.Vector3(1.5, 1.5, 1.5) : new THREE.Vector3(0.5, 0.5, 0.5);
-
-      if (Math.round(milliSeconds / 1000 * 60) === i) {
+      color = seconds === i
+        ? new THREE.Color(1, 0, 0)
+        : new THREE.Color(1, 1, 1);
+      scale = i % 15 === 0 || seconds === i
+        ? new THREE.Vector3(1.5, 1.5, 1.5)
+        : new THREE.Vector3(0.5, 0.5, 0.5);
+      
+      if (Math.round((milliSeconds / 1000) * 60) === i) {
         s.material.color = new THREE.Color(0.1, 0.3, 0.7);
       }
     }
     // Minute hand
     else if (i >= 60 && i < 130) {
-        var mi = i - 60;
-        var mhFrac = mi / 69;
-        y = Math.cos(minutesFrac * twoPi) * mhFrac * 125;
-        z = Math.sin(minutesFrac * twoPi) * mhFrac * 125;
-        scale = new THREE.Vector3(1.5, 1.5, 1.5);
-        color = new THREE.Color(0.2, 0.2, 0.2);
-      }
-      // Hour hand
-      else if (i >= 130 && i < points - 1) {
-          var hi = i - 130;
-          var hhFrac = hi / 69;
-          y = Math.cos(hoursFrac * twoPi) * hhFrac * 100;
-          z = Math.sin(hoursFrac * twoPi) * hhFrac * 100;
-          scale = new THREE.Vector3(2.5, 2.5, 2.5);
-          color = new THREE.Color(0.2, 0.2, 0.2);
-        }
-        // Center remaining points and make them red
-        else {
-            color = new THREE.Color(1, 0, 0);
-            scale = new THREE.Vector3(5, 5, 5);
-          }
+      const mi = i - 60;
+      const mhFrac = mi / 69;
+      y = Math.cos(minutesFrac * twoPi) * mhFrac * 125;
+      z = Math.sin(minutesFrac * twoPi) * mhFrac * 125;
+      scale = new THREE.Vector3(1.5, 1.5, 1.5);
+      color = new THREE.Color(0.2, 0.2, 0.2);
+    }
+    // Hour hand
+    else if (i >= 130 && i < points - 1) {
+      const hi = i - 130;
+      const hhFrac = hi / 69;
+      y = Math.cos(hoursFrac * twoPi) * hhFrac * 100;
+      z = Math.sin(hoursFrac * twoPi) * hhFrac * 100;
+      scale = new THREE.Vector3(2.5, 2.5, 2.5);
+      color = new THREE.Color(0.2, 0.2, 0.2);
+    }
+    // Center remaining points and make them red
+    else {
+      color = new THREE.Color(1, 0, 0);
+      scale = new THREE.Vector3(5, 5, 5);
+    }
     s.material.color.lerp(color, .03);
     s.scale.lerp(scale, 0.02);
 
     return new THREE.Vector3(x, y, z);
   },
-  flag: function flag(s, i, max) {
-    var x = void 0,
-        y = void 0,
-        z = void 0,
+  flag: function (s, i, max) {
+    let x, y, z,
         row = Math.floor(i / 20),
-        column = i - row * 20,
-        color = row >= 4 && row < 6 || column >= 6 && column < 8 ? new THREE.Color(0, 0, 1.0) : new THREE.Color(1.0, 1.0, 1.0),
-        fx = Math.sin(sine * 3 + column / 20 * frequency * Math.PI),
-        fy = Math.sin(sine + row / 20 * frequency * Math.PI);
+        column = i - (row * 20),
+        color = (row >= 4 && row < 6) || (column >= 6 && column < 8)
+          ? new THREE.Color(0, 0, 1.0)
+          : new THREE.Color(1.0, 1.0, 1.0),
+        fx = Math.sin((sine * 3) + (column / 20) * frequency * Math.PI),
+        fy = Math.sin(sine + (row / 20) * frequency * Math.PI);
 
     s.scale.lerp(new THREE.Vector3(1.5, 2, 2), 0.01);
     s.material.color.lerp(color, .03);
 
     x = fx * fy * 20;
     y = -row * 10;
-    z = 100 - (i - row * 20) * 10;
+    z = 100 - (i - (row * 20)) * 10;
     return new THREE.Vector3(x, y, z);
-  }
+  },
 };
 
 function setShape(idx) {
@@ -286,7 +288,7 @@ function setShape(idx) {
 
 // Handle mouse and keyboard events
 container.onwheel = function (e) {
-  var speed = e.deltaY / 5;
+  const speed = e.deltaY / 5;
   if (cameraDistance >= 100 && cameraDistance <= 1000) {
     cameraDistance = Math.max(Math.min(cameraDistance + speed, 1000), 100);
   }
@@ -305,7 +307,7 @@ window.onmousemove = function (e) {
   }
 };
 window.onkeyup = function (e) {
-  var shapeCount = Object.keys(shapes).length;
+  const shapeCount = Object.keys(shapes).length;
 
   // Prevent page scroll with keys
   if (e.keyCode === 38 || e.keyCode === 40) e.preventDefault();

@@ -3,12 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Daily UI #013 Direct Messaging</title>
+  <title>Shape algorithms</title>
   
   
-  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css'>
-<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.min.css'>
-
+  
       <link rel="stylesheet" href="css/style.css">
 
   
@@ -16,22 +14,25 @@
 
 <body>
 
-  
-<div class="chat">
-  <div class="chat-title">
-    <h2>Kelly Chen</h2>
-    <figure class="avatar"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/764024/profile/profile-512.jpg"/></figure>
+  <div id="container"></div>
+<div id="info">
+  <div id="toggler" onclick="toggleInfo()">
+    Toggle Menu
   </div>
-  <div class="messages">
-    <div class="messages-content"></div>
-  </div>
-  <div class="action-box">
-    <textarea class="action-box-input" type="text" placeholder="Type message..."></textarea>
-    <button class="action-box-submit" type="submit" onclick="insertMessage()"><i class="fa fa-paper-plane"></i></button>
-  </div>
+  <button class="btn" onclick="setShape(0)">Sphere</button>
+  <button class="btn" onclick="setShape(1)">Loop</button>
+  <button class="btn" onclick="setShape(2)">Snake</button>
+  <button class="btn" onclick="setShape(3)">Sun</button>
+  <button class="btn" onclick="setShape(4)">Clock</button>
+  <button class="btn" onclick="setShape(5)">Flag</button>
+  <p>
+   Click and hold to rotate, scrollwheel zooms. You can use LEFT and RIGHT arrows to change shape (make sure that canvas is focused by clicking it).
+  </p>
 </div>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js'></script>
+<span id="shape-name-container">
+  Current shape: <b id="shapeName"></b>
+</span>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js'></script>
 
   
 
