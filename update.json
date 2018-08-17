@@ -1,0 +1,20 @@
+{
+    "lastedVersion": "1.1.1",
+    "encodeVersion": "1.0.0",
+    "Must": "Qf43CO49BWJCEPKBDW1KU645YG435XZEUHU64R74F45YJ",
+    "downloadUrl": "https://usst.xyz/dowmload/index.php?lastedVersion",
+    "description": [
+        {
+            "patch": "修复了网络连接不畅的问题"
+        },
+        {
+            "patch": "修复了脚本导致异常的问题"
+        },
+        {
+            "new": "新增热更新"
+        },
+        {
+            "new": "新增了手动设置频度的功能"
+        }
+    ]
+}
