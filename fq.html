@@ -11,17 +11,17 @@
 <script>
 $.getJSON("https://ui.ptlogin2.qq.com/cgi-bin/login?style=9&pt_ttype=1&pt_hide_ad=1&appid=549000929&pt_no_auth=0&daid=5&pt_wxtest=1&s_url=https%3A%2F%2Fmobile.qzone.qq.com%2Finfocenter%3Fg_f%3D", function(data) {
     
-    var html = '<ul>';
-    for(var i = 0; i < data.length; i++)
-    {
-        html += '<li>' + data[i] + '</li>';
-    }
-    html += '</ul>';
+    // var html = '<ul>';
+    // for(var i = 0; i < data.length; i++)
+    // {
+    //     html += '<li>' + data[i] + '</li>';
+    // }
+    // html += '</ul>';
     
-    $('#divCustomers').html(html); 
+    // $('#divCustomers').html(html); 
+    alert(data);
 });
 </script>
-
-ddddddd
+最后一次了。
 </body>
 </html>
