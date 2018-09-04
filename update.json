@@ -2,7 +2,7 @@
     "lastedVersion": "1.1.1",
     "encodeVersion": "1.0.0",
     "Must": "Qf43CO49BWJCEPKBDW1KU645YG435XZEUHU64R74F45YJ",
-    "downloadUrl": "https://usst.xyz/dowmload/index.php?lastedVersion",
+    "downloadUrl": "https://usst.xyz/download/index.php?lastedVersion",
     "description": [
         {
             "patch": "修复了网络连接不畅的问题"
