@@ -1,5 +1,3 @@
-A Pen created at CodePen.io. You can find this one at https://codepen.io/funxer/pen/odBgry.
+A Pen created at CodePen.io. You can find this one at https://codepen.io/cMack87/pen/rVmEQm.
 
- Experimenting with THREE.JS, trying to come up with nice looking shapes and things with 200 spheres.
-
-Click and hold to rotate, scrollwheel zooms. You can also use LEFT and RIGHT arrows to change shape. 
+ A clock made of traditional 7 segment LEDs, animated with CSS and JS
